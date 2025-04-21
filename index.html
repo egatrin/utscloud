@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Website Animasi Dalam Kotak Berwarna</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f1f4f3, #ACB6E5);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card {
+      background: linear-gradient(135deg, #4A00E0, #8E2DE2);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+      text-align: center;
+      max-width: 400px;
+      color: white;
+      animation: fadeIn 1.5s ease-in-out forwards;
+      opacity: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card h1 {
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 1rem;
+      margin: 10px 0;
+    }
+
+    .card button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 30px;
+      background-color: white;
+      color: #6a11cb;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      margin-top: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .card button:hover {
+      background-color: #f0f0f0;
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .love {
+      position: absolute;
+      font-size: 1.5rem;
+      color: #ff4da6;
+      animation: love-float 2s ease-out forwards;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes love-float {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-150px) scale(1.8) rotate(30deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Selamat Datang!</h1>
+    <p>Ini adalah profil saya! Kenalin yaaa</p>
+    <p><strong>Namaku :</strong> Mega Tri Nurdiani</p>
+    <p><strong>NIM :</strong> 15-2022-206</p>
+    <button onclick="showLove(this)">Klik tombol ini...</button>
+  </div>
+
+  <script>
+    function showLove(button) {
+      for (let i = 0; i < 10; i++) {
+        const love = document.createElement('div');
+        love.classList.add('love');
+        love.innerHTML = '❤️';
+
+        // Ambil posisi tombol di layar
+        const rect = button.getBoundingClientRect();
+        const x = rect.left + rect.width / 2;
+        const y = rect.top + rect.height / 2;
+
+        // Atur posisi love
+        love.style.left = `${x}px`;
+        love.style.top = `${y}px`;
+
+        // Tambahkan love ke body
+        document.body.appendChild(love);
+
+        // Hapus setelah animasi selesai
+        setTimeout(() => {
+          love.remove();
+        }, 2000);
+      }
+    }
+  </script>
+</body>
+</html>
